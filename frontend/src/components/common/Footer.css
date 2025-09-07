@@ -1,0 +1,27 @@
+/* Footer.css */
+.app-footer {
+  /* 기존 스타일 유지 */
+  background-color: #212529;
+  padding: 3rem 0;
+
+  /* 고정 푸터 스타일 추가 */
+  position: fixed; /* 💡 화면에 고정 */
+  bottom: 0; /* 💡 하단에 위치 */
+  left: 0;
+  width: 100%; /* 💡 너비를 꽉 채움 */
+  z-index: 1000; /* 💡 다른 요소 위에 표시 */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  margin: 0;
+  color: white;
+  text-align: center;
+}
