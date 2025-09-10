@@ -1,10 +1,14 @@
 import React from "react";
-import Banner from "../components/home/Banner";
+import StudyList from "../components/home/StudyList"; 
+import CategorySection from "../components/home/CategorySection"; 
+import RecentStudies from "../components/home/RecommendedStudies";
 
 const Home = () => {
   return (
     <>
-      <Banner />
+      <RecentStudies />
+      <StudyList />
+      <CategorySection />
     </>
   );
 };

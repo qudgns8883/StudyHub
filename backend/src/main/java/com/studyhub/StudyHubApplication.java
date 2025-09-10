@@ -1,13 +1,16 @@
-package com.Dallyeowa.Dallyeowa;
+package com.studyhub;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
-public class DallyeowaApplication {
+@MapperScan("com.studyhub")
+public class StudyHubApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DallyeowaApplication.class, args);
+		SpringApplication.run(StudyHubApplication.class, args);
 	}
 
 }

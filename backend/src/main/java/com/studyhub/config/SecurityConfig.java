@@ -1,12 +1,19 @@
-package com.Dallyeowa.Dallyeowa.config;
+package com.studyhub.config;
 
+import com.studyhub.filter.CspFilter;
+import com.studyhub.jwt.*;
+import com.studyhub.user.mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
@@ -20,6 +27,23 @@ import java.util.Collections;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final RedisTemplate<String, String> redisTemplate;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil;
+    private final UserMapper userMapper;
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,11 +63,18 @@ public class SecurityConfig {
                         return configuration;
                     }
                 }))
+                .csrf((auth) -> auth.disable())
+                .formLogin((auth) -> auth.disable())
+                .httpBasic((auth) -> auth.disable())
                 .authorizeHttpRequests((auth) -> auth
-                        .anyRequest().permitAll()) // 모든 요청 허용
+                        .anyRequest().permitAll())
+                .addFilterBefore(new JWTFilter(jwtUtil, userMapper), LoginFilter.class)
+                .addFilterBefore(new RefreshTokenFilter(jwtUtil, redisTemplate), JWTFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, redisTemplate), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, redisTemplate), LogoutFilter.class)
+                .addFilterBefore(new CspFilter(), UsernamePasswordAuthenticationFilter.class) // CSP 필터 추가
                 .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 안함
-                .csrf(csrf -> csrf.disable()); // CSRF 비활성화
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 }
