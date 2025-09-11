@@ -23,6 +23,7 @@ const Login = () => {
     event.preventDefault();
     try {
       await login({ email: dEmail, password: dPassword });
+
       showToast("Hi 👏🏻", "success", darkMode);
       setTimeout(() => {
         navigate("/");
@@ -34,7 +35,7 @@ const Login = () => {
 
   return (
     <div
-      className={`min-h-[calc(70vh)] py-6 flex flex-col justify-center sm:py-12 ${
+      className={`min-h-[calc(75vh)] py-6 flex flex-col justify-center sm:py-12 ${
         darkMode ? "dark:bg-custom-dark-bg" : "bg-custom-light-bg"
       }`}
     >

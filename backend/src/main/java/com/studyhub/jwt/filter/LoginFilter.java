@@ -1,4 +1,4 @@
-package com.studyhub.jwt;
+package com.studyhub.jwt.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studyhub.utill.CookieUtil;
@@ -16,7 +16,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit; // TimeUnit 임포트
 
@@ -29,7 +28,6 @@ import java.util.concurrent.TimeUnit; // TimeUnit 임포트
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     // 주입 받기 위해서는 SecurityConfig에서 filter에 필드들을 주입해줘야함
-//    addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
     private final RedisTemplate<String, String> redisTemplate;
@@ -87,7 +85,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtUtil.createJwt("access", nickname, 50000L);
         String refresh = jwtUtil.createJwt("refresh", nickname, 86400000L);
 
-        // Save refresh token to Redis with an expiration time
         redisTemplate.opsForValue().set(nickname, refresh, 86400000L, TimeUnit.MILLISECONDS);
 
         response.setHeader("access", access);

@@ -33,4 +33,9 @@ public class UserService {
         userMapper.signup(encodedUserDto);
     }
 
+    //사용자 정보
+    public UserDto getUserInfo(String nickname) {
+
+        return userMapper.findByNickname(nickname);
+    }
 }

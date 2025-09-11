@@ -1,100 +1,14 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-
-// 아이콘 컴포넌트의 props 타입을 정의합니다.
-// 이렇게 하면 TypeScript가 className이 문자열임을 인식하여 오류를 제거합니다.
-interface IconProps {
-  className?: string;
-}
-
-// 인라인 SVG 아이콘 컴포넌트
-const BookIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M21 4H7a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM7 6h14v11H7V6zm-2 15a2 2 0 01-2-2V5a2 2 0 012-2h12v2H5v14h12v2H7z" />
-  </svg>
-);
-
-const UsersIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M12 2a5 5 0 00-5 5v3a2 2 0 002 2h6a2 2 0 002-2V7a5 5 0 00-5-5zm0 2a3 3 0 013 3v3H9V7a3 3 0 013-3zm7 11H5a2 2 0 00-2 2v2h18v-2a2 2 0 00-2-2zm-2 2H7v-2a.9.9 0 01.9-.9h8.2a.9.9 0 01.9.9v2z" />
-  </svg>
-);
-
-const CheckCircleIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M12 2a10 10 0 1010 10A10.011 10.011 0 0012 2zm-2 15.5l-5-5 1.5-1.5 3.5 3.5 6.5-6.5 1.5 1.5-8 8z" />
-  </svg>
-);
-
-const CalendarIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm-1 16H6V10h12v10zM5 8V6h14v2z" />
-  </svg>
-);
-
-const ClockIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8.009 8.009 0 01-8 8zm-.5-13h1a.5.5 0 01.5.5v4.5a.5.5 0 01-.5.5h-5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5H11V8.5a.5.5 0 01-.5-.5z" />
-  </svg>
-);
-
-const TagIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M21.5 12l-7-7H7c-1.103 0-2 .897-2 2v7.586l-2.439 2.439a1 1 0 000 1.414l3.586 3.586a1 1 0 001.414 0L14.586 16H21.5a1 1 0 000-2h-6.707l3.293-3.293a1 1 0 000-1.414zM8 7h2v2H8z" />
-  </svg>
-);
-
-const ChevronLeftIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-  </svg>
-);
-
-const ChevronRightIcon = ({ className }: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-  </svg>
-);
+import {
+  BookIcon,
+  UsersIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  TagIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "../assets/svg/SvgIcons";
 
 const StudyCreationForm = () => {
   const [step, setStep] = useState(1);
@@ -113,10 +27,8 @@ const StudyCreationForm = () => {
     >
   ) => {
     const { name, value } = e.target;
-    // 디버깅을 위해 현재 필드명과 값, 그리고 타입을 콘솔에 출력합니다.
     console.log(`Field: ${name}, Value: ${value}, Type: ${typeof value}`);
     if (name === "maxParticipants") {
-      // 'maxParticipants'는 숫자로 변환하여 저장합니다.
       setFormData({ ...formData, [name]: parseInt(value) || 0 });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -324,7 +236,7 @@ const StudyCreationForm = () => {
                 </div>
               </div>
               <div className="flex items-center p-4 rounded-lg bg-gray-50 dark:bg-gray-700 shadow-sm">
-                <CalendarIcon className="w-6 h-6 mr-4 text-blue-500" />
+                <UsersIcon className="w-6 h-6 mr-4 text-blue-500" />
                 <div>
                   <h4 className="font-semibold text-gray-700 dark:text-gray-300">
                     시작일
@@ -388,39 +300,36 @@ const StudyCreationForm = () => {
           </p>
 
           {/* 진행바 섹션 */}
-          <div className="flex justify-between items-center mb-10">
-            {[1, 2, 3].map((s) => (
+          <div className="relative pt-1 mb-8">
+            <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
               <div
-                key={s}
-                className={`flex-1 flex flex-col items-center relative z-10 ${
-                  s === step ? "text-blue-500" : "text-gray-400"
+                className={`flex-1 text-center font-medium ${
+                  step >= 1 ? "text-blue-600" : "text-gray-500"
                 }`}
               >
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-colors duration-300 ${
-                    s <= step
-                      ? "bg-blue-500 text-white border-blue-500"
-                      : "bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-600"
-                  }`}
-                >
-                  {s <= step ? <CheckCircleIcon className="w-4 h-4" /> : s}
-                </div>
-                <span className="mt-2 text-center text-sm">
-                  {s === 1 ? "기본 정보" : s === 2 ? "모집 정보" : "확인"}
-                </span>
-                {s < 3 && (
-                  <div
-                    className={`absolute left-1/2 top-4 w-full h-1 bg-gray-200 dark:bg-gray-700 transition-colors duration-300 transform -translate-x-1/2 -z-10`}
-                  >
-                    <div
-                      className={`h-full ${
-                        s <= step ? "bg-blue-500" : "bg-transparent"
-                      } transition-all duration-500`}
-                    ></div>
-                  </div>
-                )}
+                기본 정보
               </div>
-            ))}
+              <div
+                className={`flex-1 text-center font-medium ${
+                  step >= 2 ? "text-blue-600" : "text-gray-500"
+                }`}
+              >
+                모집 정보
+              </div>
+              <div
+                className={`flex-1 text-center font-medium ${
+                  step >= 3 ? "text-blue-600" : "text-gray-500"
+                }`}
+              >
+                최종 확인
+              </div>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-blue-600 h-2 rounded-full transition-all duration-500 ease-in-out"
+                style={{ width: `${(step / 3) * 100}%` }}
+              ></div>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -431,7 +340,7 @@ const StudyCreationForm = () => {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="py-3 px-6 bg-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition duration-200 flex items-center"
+                  className="py-3 px-6 bg-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition duration-200 flex items-center whitespace-nowrap"
                 >
                   <ChevronLeftIcon className="w-4 h-4 mr-2" /> 이전
                 </button>
@@ -440,7 +349,7 @@ const StudyCreationForm = () => {
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200 flex items-center ml-auto"
+                  className="py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200 flex items-center whitespace-nowrap ml-auto"
                 >
                   다음 <ChevronRightIcon className="w-4 h-4 ml-2" />
                 </button>
@@ -449,7 +358,7 @@ const StudyCreationForm = () => {
                 <div className="w-full flex justify-center">
                   <button
                     type="submit"
-                    className="py-3 px-12 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200 flex items-center justify-center"
+                    className="py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200 flex items-center whitespace-nowrap ml-auto"
                   >
                     스터디 생성하기
                   </button>

@@ -1,9 +1,10 @@
-package com.studyhub.jwt;
+package com.studyhub.jwt.filter;
 
 import com.studyhub.config.CustomUserDetails;
 import com.studyhub.user.dto.UserDto;
 import com.studyhub.user.mapper.UserMapper;
 import com.studyhub.utill.CookieUtil;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,13 +36,15 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String cookieAccessToken = CookieUtil.getCookieValue(request, "access");
+        String uri = request.getRequestURI();
 
-        if (cookieAccessToken != null) {
-            response.setHeader("access", cookieAccessToken);
-            filterChain.doFilter(request, response);
-            return;
-        }
+//        String cookieAccessToken = CookieUtil.getCookieValue(request, "access");
+//
+//        if (cookieAccessToken != null) {
+//            response.setHeader("access", cookieAccessToken);
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
         String authorization = request.getHeader("Authorization");
 
@@ -52,12 +55,20 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String token = authorization.split(" ")[1];
 
-        if (jwtUtil.isExpired(token)) {
+        try {
+            jwtUtil.isExpired(token);
+        } catch ( ExpiredJwtException e){
+
+            if (uri.equals("/reissue")) {
+                // 재발급 요청이면 통과 (AccessToken 만료는 정상)
+                filterChain.doFilter(request, response);
+                return;
+            }
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Refresh token has expired.");
-            filterChain.doFilter(request, response);
+            response.getWriter().write("access token has expired.");
             return;
         }
+
 
         String nickname = jwtUtil.getNickname(token);
 

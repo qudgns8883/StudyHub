@@ -7,4 +7,3 @@ export interface User {
 
 export interface UserSignUp extends Omit<User, "id"> {}
 export interface UserLogin extends Pick<User, "email" | "password"> {}
-

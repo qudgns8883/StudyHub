@@ -1,6 +1,5 @@
 import type { SvgState } from "../../types/indext";
 
-
 export const DiscordIcon = () => (
   <svg
     className="w-4 h-4"
@@ -62,5 +61,93 @@ export const DarkModeIcon: React.FC<SvgState> = ({ className }) => (
       className="fill-slate-500"
       d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"
     />
+  </svg>
+);
+
+export const ClockIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8.009 8.009 0 01-8 8zm-.5-13h1a.5.5 0 01.5.5v4.5a.5.5 0 01-.5.5h-5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5H11V8.5a.5.5 0 01-.5-.5z" />
+  </svg>
+);
+
+export const BookIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M21 4H7a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM7 6h14v11H7V6zm-2 15a2 2 0 01-2-2V5a2 2 0 012-2h12v2H5v14h12v2H7z" />
+  </svg>
+);
+
+export const UsersIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M12 2a5 5 0 00-5 5v3a2 2 0 002 2h6a2 2 0 002-2V7a5 5 0 00-5-5zm0 2a3 3 0 013 3v3H9V7a3 3 0 013-3zm7 11H5a2 2 0 00-2 2v2h18v-2a2 2 0 00-2-2zm-2 2H7v-2a.9.9 0 01.9-.9h8.2a.9.9 0 01.9.9v2z" />
+  </svg>
+);
+
+export const CheckCircleIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M12 2a10 10 0 1010 10A10.011 10.011 0 0012 2zm-2 15.5l-5-5 1.5-1.5 3.5 3.5 6.5-6.5 1.5 1.5-8 8z" />
+  </svg>
+);
+
+export const CalendarIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm-1 16H6V10h12v10zM5 8V6h14v2z" />
+  </svg>
+);
+
+export const TagIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M21.5 12l-7-7H7c-1.103 0-2 .897-2 2v7.586l-2.439 2.439a1 1 0 000 1.414l3.586 3.586a1 1 0 001.414 0L14.586 16H21.5a1 1 0 000-2h-6.707l3.293-3.293a1 1 0 000-1.414zM8 7h2v2H8z" />
+  </svg>
+);
+
+export const ChevronLeftIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+  </svg>
+);
+
+export const ChevronRightIcon: React.FC<SvgState> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
   </svg>
 );

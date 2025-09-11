@@ -1,4 +1,4 @@
-package com.studyhub.jwt;
+package com.studyhub.jwt.filter;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package com.studyhub.jwt;
+package com.studyhub.jwt.filter;
 
 import com.studyhub.utill.CookieUtil;
 import jakarta.servlet.FilterChain;

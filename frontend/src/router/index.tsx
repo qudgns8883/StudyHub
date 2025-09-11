@@ -3,7 +3,7 @@ import App from "../App";
 import Home from "../pages/Home";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
-import StudyCreationForm from "../pages/StudyCreationForm";
+import CreateStudy from "../pages/CreateStudy";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "signup", element: <SignUp /> },
       { path: "login", element: <Login /> },
-      { path: "studyCreationForm", element: <StudyCreationForm /> },
+      { path: "createStudy", element: <CreateStudy /> },
     ],
   },
 ]);

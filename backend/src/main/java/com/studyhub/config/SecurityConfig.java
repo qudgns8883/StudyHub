@@ -1,7 +1,7 @@
 package com.studyhub.config;
 
 import com.studyhub.filter.CspFilter;
-import com.studyhub.jwt.*;
+import com.studyhub.jwt.filter.*;
 import com.studyhub.user.mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
