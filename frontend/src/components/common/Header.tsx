@@ -7,11 +7,9 @@ import useUserStore from "../../stores/useUserStore";
 
 const Header: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
   const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
-  
-  // 필요한 상태를 가져옵니다.
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
-  const isLoading = useUserStore((state) => state.isLoading); 
+  const isLoading = useUserStore((state) => state.isLoading);
 
   return (
     <header className="fixed w-full top-0 bg-white dark:bg-gray-800 shadow-md z-10">
@@ -29,7 +27,7 @@ const Header: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
             <Link
-              to="/study/search"
+              to="/StudyFindPage"
               className="text-gray-900 dark:text-white hover:text-blue-600 transition-colors duration-200"
             >
               스터디 찾기
@@ -43,12 +41,9 @@ const Header: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
           </nav>
         </div>
         <nav className="flex items-center space-x-6">
-          {/* 로딩 상태에 따라 UI를 분기합니다. */}
           {isLoading ? (
-            // 로딩 중일 때: 스피너 또는 로딩 메시지 표시
             <span className="text-gray-900 dark:text-white">로딩 중...</span>
           ) : user ? (
-            // 로그인 상태일 때: 닉네임과 로그아웃 버튼 표시
             <>
               <span className="text-gray-900 dark:text-white font-semibold">
                 {user.nickname}님
@@ -61,7 +56,6 @@ const Header: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
               </button>
             </>
           ) : (
-            // 로그아웃 상태일 때: 회원가입과 로그인 링크 표시
             <>
               <Link
                 to="/signup"

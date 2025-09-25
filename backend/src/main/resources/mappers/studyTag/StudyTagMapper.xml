@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studyhub.studyTag.mapper.StudyTagMapper">
+
+    <insert id="insertStudyTag">
+        INSERT INTO study_tags (study_id, tag_id) VALUES (#{studyId}, #{tagId})
+    </insert>
+
+    <insert id="bulkInsertStudyTags">
+        INSERT INTO study_tags (study_id, tag_id)
+        VALUES
+        <foreach item="tagId" collection="tagIds" separator=",">
+            (#{studyId}, #{tagId})
+        </foreach>
+    </insert>
+</mapper>

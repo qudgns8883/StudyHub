@@ -7,10 +7,10 @@ import { useEffect } from "react";
 
 function App() {
   const darkMode = useDarkModeStore((state) => state.darkMode);
-   const getMyProfile = useUserStore((state) => state.getMyProfile);
+  const getMyProfile = useUserStore((state) => state.getMyProfile);
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('access');
+    const accessToken = localStorage.getItem("access");
     if (accessToken) {
       getMyProfile();
     }

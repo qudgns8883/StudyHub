@@ -1,12 +1,17 @@
 package com.studyhub.user.service;
 
 
+import com.studyhub.config.CustomUserDetails;
 import com.studyhub.user.dto.UserDto;
 import com.studyhub.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Service
@@ -31,11 +36,5 @@ public class UserService {
 
 
         userMapper.signup(encodedUserDto);
-    }
-
-    //사용자 정보
-    public UserDto getUserInfo(String nickname) {
-
-        return userMapper.findByNickname(nickname);
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studyhub.study.mapper.StudyMapper">
+
+
+    <!-- 새로운 스터디 정보를 studies 테이블에 삽입하고, 자동 생성된 ID를 studyDto에 다시 담습니다. -->
+    <insert id="insertStudy" parameterType="com.studyhub.study.dto.StudyCreationDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO studies (title, description, max_participants, start_date, duration, creator_id)
+        VALUES (#{studyDto.title}, #{studyDto.description}, #{studyDto.maxParticipants},
+        #{studyDto.startDate}, #{studyDto.duration}, #{studyDto.creatorId})
+    </insert>
+
+    <select id="findRecentStudies" resultType="com.studyhub.study.dto.StudyResponseDto">
+        SELECT
+        s.id,
+        s.title,
+        s.description,
+        s.max_participants AS maxParticipants,
+        s.start_date AS startDate,
+        s.duration,
+        s.creator_id AS creatorId,
+        GROUP_CONCAT(t.name) AS tags
+        FROM studies s
+        LEFT JOIN study_tags st ON s.id = st.study_id
+        LEFT JOIN tags t ON st.tag_id = t.id
+        GROUP BY s.id
+        ORDER BY s.created_at DESC
+        LIMIT 20;
+    </select>
+
+    <select id="getStudyById" parameterType="int" resultType="com.studyhub.study.dto.StudyResponseDto">
+        SELECT
+        s.id,
+        s.title,
+        s.description,
+        s.max_participants AS maxParticipants,
+        s.current_participants AS currentParticipants,
+        s.start_date AS startDate,
+        s.duration,
+        s.creator_id AS creatorId,
+        GROUP_CONCAT(t.name) AS tags
+        FROM studies s
+        LEFT JOIN study_tags st ON s.id = st.study_id
+        LEFT JOIN tags t ON st.tag_id = t.id
+        WHERE s.id = #{studyId}
+        GROUP BY s.id;
+    </select>
+
+</mapper>

@@ -13,7 +13,11 @@ export default class userService {
 
   /* 로그인 */
   static async login(userLogin: UserLogin): Promise<User> {
-    const response = await axios.post(`${this.BASE_URL}/login`, userLogin, {});
+    const response = await axios.post(
+      `${this.BASE_URL}/login`,
+      userLogin,
+      { withCredentials: true } // 🔥 쿠키 교환 허용
+    );
     const { access } = response.headers;
     localStorage.setItem("access", access);
 

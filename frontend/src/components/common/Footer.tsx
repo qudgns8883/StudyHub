@@ -14,7 +14,7 @@ const Footer = () => {
                 alt="FlowBite Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-custom-light-text dark:text-custom-dark-text">
-                CozyHouse
+                StudyHub
               </span>
             </a>
           </div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studyhub.tag.mapper.TagMapper">
+
+    <insert id="insertTag" parameterType="string">
+        INSERT INTO tags (name) VALUES (#{tagName})
+    </insert>
+
+    <select id="findTagIdByName" parameterType="string" resultType="long">
+        SELECT id FROM tags WHERE name = #{tagName}
+    </select>
+
+    <select id="findTagIdsByNames" resultType="long">
+        SELECT id FROM tags WHERE name IN
+        <foreach item="name" collection="tagNames" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </select>
+
+    <insert id="insertTags">
+        INSERT IGNORE INTO tags (name) VALUES
+        <foreach item="name" collection="tagNames" separator=",">
+            (#{name})
+        </foreach>
+    </insert>
+
+    <select id="findAll" resultType="com.studyhub.tag.dto.TagDto">
+        SELECT
+        id,
+        name
+        FROM tags
+    </select>
+</mapper>

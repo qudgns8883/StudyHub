@@ -15,7 +15,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  /*  디바운스 적용 입력 최적화 */
   const [dEmail] = useDebounce(email, 300);
   const [dPassword] = useDebounce(password, 300);
 

@@ -9,9 +9,11 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "../assets/svg/SvgIcons";
+import StudyStore from "../stores/study";
 
 const StudyCreationForm = () => {
   const [step, setStep] = useState(1);
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -21,19 +23,21 @@ const StudyCreationForm = () => {
     duration: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    console.log(`Field: ${name}, Value: ${value}, Type: ${typeof value}`);
+  const createStudy = StudyStore((state) => state.createStudy);
+
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target;
+
+  setFormData((prev) => {
     if (name === "maxParticipants") {
-      setFormData({ ...formData, [name]: parseInt(value) || 0 });
-    } else {
-      setFormData({ ...formData, [name]: value });
+      const numberValue = value === "" ? 0 : parseInt(value, 10);
+      return { ...prev, [name]: numberValue };
     }
-  };
+    return { ...prev, [name]: value };
+  });
+};
 
   const nextStep = () => {
     if (step < 3) setStep(step + 1);
@@ -43,12 +47,12 @@ const StudyCreationForm = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Final Form Data:", formData);
-    // 실제로는 여기에 API 호출 로직을 구현합니다.
+
+    await createStudy(formData);
+
     const message = "스터디 생성이 완료되었습니다!";
-    // alert 대신 커스텀 모달 UI를 사용합니다.
     const messageBox = document.createElement("div");
     messageBox.className =
       "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
@@ -62,10 +66,8 @@ const StudyCreationForm = () => {
   };
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 body의 overflow를 hidden으로 설정하여 스크롤을 막습니다.
     document.body.style.overflow = "hidden";
 
-    // 컴포넌트가 언마운트될 때 원래대로 되돌립니다.
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -299,7 +301,6 @@ const StudyCreationForm = () => {
             팀원들과 함께 성장할 멋진 스터디를 계획해 보세요.
           </p>
 
-          {/* 진행바 섹션 */}
           <div className="relative pt-1 mb-8">
             <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
               <div

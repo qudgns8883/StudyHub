@@ -22,6 +22,10 @@
         SELECT * FROM users WHERE nickname = #{nickname}
     </select>
 
+    <select id="findByUserId" parameterType="com.studyhub.user.dto.UserDto">
+        SELECT * FROM users WHERE id = #{userId}
+    </select>
+
     <select id="findByEmail" parameterType="String" resultType="com.studyhub.user.dto.UserDto">
         SELECT
         email,
